@@ -1,0 +1,64 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-semibold my-4">Shopping Cart</h1>
+        <div id="cart" class="bg-white p-4 rounded">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div id="cart-total" class="mt-4">
+            <!-- Total price will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function updateCartDisplay() {
+            const cartElement = document.getElementById('cart');
+            cartElement.innerHTML = '';
+
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                const itemPrice = item.price * item.quantity;
+                totalPrice += itemPrice;
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'mb-2';
+                cartItem.innerHTML = `
+                    <div class="flex justify-between">
+                        <img src="${item.image}" alt="${item.title}" class="w-16">
+                        <p>${item.title} x${item.quantity}</p>
+                        <p>$${itemPrice.toFixed(2)}</p>
+                        <button class="text-red-500" onclick="removeFromCart('${item.title}')">Delete</button>
+                    </div>
+                `;
+                cartElement.appendChild(cartItem);
+            });
+
+            const totalElement = document.getElementById('cart-total');
+            totalElement.innerHTML = `<p class="text-2xl font-semibold">Total: $${totalPrice.toFixed(2)}</p>`;
+        }
+
+        function removeFromCart(title) {
+            const index = cart.findIndex(item => item.title === title);
+            if (index !== -1) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            }
+        }
+
+        // Initialize cart display
+        updateCartDisplay();
+    </script>
+</body>
+</html>

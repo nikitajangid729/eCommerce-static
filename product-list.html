@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto">
+        <input id="search-input" type="text" placeholder="Search products..." class="w-80 border rounded p-2 my-4">
+        
+        <div class="flex items-center my-4">
+            <span class="mr-2">Price Range:</span>
+            <input id="min-price" type="number" placeholder="Min" class="w-24 border rounded p-2">
+            <span class="mx-2">to</span>
+            <input id="max-price" type="number" placeholder="Max" class="w-24 border rounded p-2">
+            <button id="filter-btn" class="bg-blue-500 text-white ml-4 px-2 py-1 rounded">Filter</button>
+        </div>
+
+        <h1 class="text-3xl font-semibold my-4">Product Page</h1>
+
+        <!-- Product List -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" id="product-list">
+            <!-- Product Cards -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 1</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Mobile</span>
+                <img src="https://m.media-amazon.com/images/I/71PzXKXjz6L._SX679_.jpg" alt="Product 1" class="w-1/3 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $10.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 1" data-price="10.00" data-img="https://m.media-amazon.com/images/I/71PzXKXjz6L._SX679_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 2</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Shoes</span>
+
+                <img src="https://m.media-amazon.com/images/I/41jpG05LbuL._UY695_.jpg" alt="Product 2" class="w-1/3 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $15.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 2" data-price="15.00" data-img="https://m.media-amazon.com/images/I/41jpG05LbuL._UY695_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 3</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Mobile</span>
+
+                <img src="https://m.media-amazon.com/images/I/71PzXKXjz6L._SX679_.jpg" alt="Product 3" class="w-1/3 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $20.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 3" data-price="20.00" data-img="https://m.media-amazon.com/images/I/71PzXKXjz6L._SX679_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 4</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Table</span>
+
+                <img src="https://m.media-amazon.com/images/I/317O8IJ5VGL._SY300_SX300_QL70_FMwebp_.jpg" alt="Product 4" class="w-1/3 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $25.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 4" data-price="25.00" data-img="https://m.media-amazon.com/images/I/317O8IJ5VGL._SY300_SX300_QL70_FMwebp_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 5</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Toy</span>
+
+                <img src="https://m.media-amazon.com/images/I/51cCXZiIe8L._SY300_SX300_QL70_FMwebp_.jpg" alt="Product 5" class="w-1/2 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $30.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 5" data-price="30.00" data-img="https://m.media-amazon.com/images/I/51cCXZiIe8L._SY300_SX300_QL70_FMwebp_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="bg-white p-4 border border-gray-300 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Product 6</h2>
+                <span class="bg-blue-200 text-blue-600 px-2 py-1 rounded-full text-xs mb-2">Gifts</span>
+
+                <img src="https://m.media-amazon.com/images/I/31UpeEgbYHL._SX300_SY300_QL70_FMwebp_.jpg" alt="Product 6" class="w-1/3 h-48 object-cover mb-2">
+                <p class="text-gray-500">Price: $35.00</p>
+                <button class="bg-blue-500 text-white px-2 py-1 rounded mt-2" data-title="Product 6" data-price="35.00" data-img="https://m.media-amazon.com/images/I/31UpeEgbYHL._SX300_SY300_QL70_FMwebp_.jpg" onclick="showProductDetails(this)">Details</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const productElements = document.querySelectorAll('#product-list > div');
+
+        // Apply filter when the filter button is clicked
+        document.getElementById('filter-btn').addEventListener('click', applyFilter);
+
+        // Real-time search functionality
+        document.getElementById('search-input').addEventListener('input', searchProducts);
+
+        function applyFilter() {
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || Number.MAX_VALUE;
+
+            productElements.forEach((element) => {
+                const priceElement = element.querySelector('p');
+                const productPrice = parseFloat(priceElement.textContent.replace('Price: $', ''));
+
+                if (productPrice >= minPrice && productPrice <= maxPrice) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts() {
+            const filter = document.getElementById('search-input').value.toLowerCase();
+
+            productElements.forEach((element) => {
+                const productTitle = element.querySelector('h2').textContent.toLowerCase();
+                if (productTitle.includes(filter)) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                }
+            });
+        }
+
+        function showProductDetails(button) {
+            const title = button.getAttribute('data-title');
+            const price = parseFloat(button.getAttribute('data-price'));
+            const image = button.getAttribute('data-img');
+            localStorage.setItem('selectedProduct', JSON.stringify({ title, price, image }));
+            window.location.href = 'product-details.html';
+        }
+    </script>
+</body>
+</html>

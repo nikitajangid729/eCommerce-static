@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-semibold my-4">Product Details</h1>
+
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-2" id="product-title"></h2>
+            <p id="product-price" class="text-gray-500"></p>
+            <img id="product-image" src="" alt="Product" class="w-1/4 h-64 object-cover rounded-lg my-2">
+            <p id="product-description" class="my-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <input id="quantity" type="number" value="1" min="1" class="w-16 border rounded p-1 my-2">
+            <button class="bg-blue-500 text-white px-2 py-1 rounded" onclick="addToCart()">Add to Cart</button>
+        </div>
+
+        <script>
+            const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+
+            const productTitle = document.getElementById('product-title');
+            const productPrice = document.getElementById('product-price');
+            const productImage = document.getElementById('product-image');
+            const productDescription = document.getElementById('product-description');
+
+            // Check if selectedProduct is not null
+            if (selectedProduct) {
+                productTitle.textContent = selectedProduct.title;
+                productPrice.textContent = `Price: $${selectedProduct.price.toFixed(2)}`;
+                productImage.src = selectedProduct.image;
+                productDescription.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+            }
+
+            function addToCart() {
+                const title = selectedProduct.title;
+                const price = selectedProduct.price;
+                const image = selectedProduct.image;
+                const quantity = parseInt(document.getElementById('quantity').value);
+
+                const item = { title, price, image, quantity };
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push(item);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                window.location.href = 'cart.html';
+            }
+        </script>
+    </div>
+</body>
+</html>
